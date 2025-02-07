@@ -392,16 +392,21 @@
       <h2 class="section-title">Связаться с нами</h2>
       <p style="margin: 1fr auto">Оставьте свои данные и мы Вам перезвоним.</p>
       <form id="contactForm" class="callback-form">
-        <input type="text" name="name" placeholder="Ваше имя" maxlength="20" />
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Ваше имя"
+          maxlength="20"
+        />
         <input
           type="tel"
           name="phone"
+          id="phone"
           placeholder="Ваш номер телефона"
           required
         />
-        <button type="submit" class="btn blue" onclick="sendNumber">
-          Перезвоните мне
-        </button>
+        <button type="submit" class="btn blue">Перезвоните мне</button>
       </form>
       <div id="formMessage"></div>
     </section>
@@ -421,17 +426,46 @@
     </footer>
   </body>
   <script>
-    function sendNumber() {
-      const botToken = "8106146920:AAEQB_YAblsmbRVGw3hFSx-lVa0JFl3qPlI";
-      const chatId = "1920391385";
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: "Новый заказ: +79991234567",
-        }),
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const botToken = "8106146920:AAEQB_YAblsmbRVGw3hFSx-lVa0JFl3qPlI";
+        const chatId = "1920391385";
+
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        if (!phone) {
+          console.log("Не введен номер телефона");
+          return;
+        }
+
+        const message = `Новый заказ!\nИмя: ${
+          name || "Не указано"
+        }\nТелефон: ${phone}`;
+
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.ok) {
+              console.log("Сообщение отправлено!");
+              document.getElementById("contactForm").reset();
+            } else {
+              console.log("Ошибка при отправке!");
+            }
+          })
+          .catch(() => {
+            console.log("Ошибка сети!");
+          });
       });
-    }
   </script>
 </html>
