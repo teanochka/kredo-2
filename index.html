@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кредо-2 - производство лакокрасочных материалов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Jost", serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .header {
+        background: #1a2947;
+        color: white;
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #4a90e2;
+      }
+
+      .logo {
+        background: url(img/200x200.png);
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .logo-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .hero {
+        height: 80vh;
+        background-image: linear-gradient(
+            rgba(26, 41, 71, 0.2),
+            rgba(26, 41, 71, 0.8)
+          ),
+          url("img/hero.jpg");
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 0 1rem;
+        margin-top: 60px;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero > div {
+        position: relative;
+        z-index: 2;
+      }
+
+      .section {
+        max-width: 1200px;
+        padding: 1rem 1rem;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #1a2947;
+      }
+
+      .section p {
+        font-size: large;
+        margin: 1rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 3rem;
+      }
+
+      .card {
+        background: #f5f5f5;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        position: relative;
+
+        transition-duration: 300ms;
+        transition-property: transform, box-shadow;
+        transition-timing-function: ease-out;
+      }
+
+      .card:hover {
+        transition-duration: 150ms;
+        transform: scale(1.07);
+        box-shadow: 0 5px 20px 5px #00000044;
+      }
+
+      .image-placeholder {
+        height: 200px;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        background-size: cover;
+      }
+
+      .btn {
+        display: inline-block;
+        color: white;
+        padding: 1rem 3rem;
+        text-decoration: none;
+        border-radius: 100px;
+        transition: background 0.3s;
+        margin-top: 1rem;
+        border: none;
+        font-size: medium;
+      }
+
+      .blue {
+        background: #4a90e2;
+      }
+
+      .grey {
+        background: #7c7c7c;
+      }
+
+      .btn:hover {
+        background: #357abd;
+      }
+
+      h3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 1.5em;
+        position: relative;
+      }
+
+      .laurel {
+        display: inline-block;
+        width: 30px;
+        height: 60px;
+        background: url("img/laurel.png") no-repeat center/contain;
+      }
+
+      .laurel-left {
+        transform: scaleX(-1);
+      }
+
+      .contacts {
+        background: #f9f9f9;
+        text-align: center;
+        max-width: 100%;
+      }
+
+      footer {
+        display: flex;
+        background: #1a2947;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 3rem;
+        text-align: start;
+        gap: 20%;
+      }
+
+      footer > div {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .callback-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+      }
+
+      input {
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+
+      .message {
+        text-align: center;
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+
+      .success {
+        background: #dff0d8;
+        color: #3c763d;
+      }
+
+      .error {
+        background: #f2dede;
+        color: #a94442;
+      }
+
+      @media (max-width: 768px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            align-items: center;
+            gap: 5px;
+          "
+        >
+          <div class="logo"></div>
+          <div class="logo-title">
+            <h1>Кредо-2</h1>
+            <p>Лакокрасочные материалы</p>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#about">О компании</a>
+          <a href="#advantages">Преимущества</a>
+          <a href="#contacts">Контакты</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Профессиональные лакокрасочные материалы</h1>
+        <p>Более 30 лет на рынке производства красок и грунтовок</p>
+        <div
+          style="
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1rem;
+          "
+        >
+          <a href="#contacts" class="blue btn">Заказать</a>
+          <a href="#contacts" class="grey btn">Подробнее</a>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="about">
+      <h2 class="section-title">О компании</h2>
+      <p>
+        Производственно-коммерческая фирма ООО "Кредо-2" специализируется на
+        производстве:
+      </p>
+      <div class="grid">
+        <div class="card">
+          <div
+            class="image-placeholder"
+            style="background-image: url(img/industrial-paint.png)"
+          ></div>
+          <h3>Промышленные краски</h3>
+          <p>Для металлических конструкций любого типа</p>
+        </div>
+        <div class="card">
+          <div
+            class="image-placeholder"
+            style="background-image: url(img/priming.png)"
+          ></div>
+          <h3>Специальные грунтовки</h3>
+          <p>Повышенной адгезии и антикоррозийной защиты</p>
+        </div>
+        <div class="card">
+          <div
+            class="image-placeholder"
+            style="background-image: url(img/individual.png)"
+          ></div>
+          <h3>Индивидуальные решения</h3>
+          <p>Подбор состава по вашим техническим требованиям</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="advantages">
+      <h2 class="section-title">Наши преимущества</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>
+            <span class="laurel laurel-left"></span>
+            30+ лет
+            <span class="laurel laurel-right"></span>
+          </h3>
+          <p>Успешной работы на рынке</p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="laurel laurel-left"></span>
+            Современные формулы
+            <span class="laurel laurel-right"></span>
+          </h3>
+          <p>Улучшенные технические характеристики продукции</p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="laurel laurel-left"></span>
+            Гибкое производство
+            <span class="laurel laurel-right"></span>
+          </h3>
+          <p>Изготовление продукции по индивидуальным заказам</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contacts" id="contacts">
+      <h2 class="section-title">Наш адрес</h2>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2346.0979797541813!2d38.49416970000001!3d53.9832841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x413691dd5e593875%3A0xdfe8ee48b44d84b1!2z0J7QntCeICLQmtGA0LXQtNC-LTIi!5e0!3m2!1sru!2sru!4v1738898476953!5m2!1sru!2sru"
+        width="100%"
+        height="450"
+        style="border: 0; max-width: 1200px; margin: 0 auto"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+      <div>
+        <p>
+          301720, Тульская обл., г. Кимовск<br />
+          Пос. Шахта 11-я Гранковская
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="callback">
+      <h2 class="section-title">Связаться с нами</h2>
+      <p style="margin: 1fr auto">Оставьте свои данные и мы Вам перезвоним.</p>
+      <form id="contactForm" class="callback-form">
+        <input type="text" name="name" placeholder="Ваше имя" maxlength="20" />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Ваш номер телефона"
+          required
+        />
+        <button type="submit" class="btn blue" onclick="sendNumber">
+          Перезвоните мне
+        </button>
+      </form>
+      <div id="formMessage"></div>
+    </section>
+
+    <footer>
+      <div>
+        <p>© ООО "Кредо-2" 2025</p>
+      </div>
+      <div>
+        <h3>Контакты</h3>
+        <p>
+          Тел./факс: (48735) 5-96-14<br />
+          Моб.: 8-910-945-49-21
+        </p>
+        <p>Email: kredo-2@list.ru</p>
+      </div>
+    </footer>
+  </body>
+  <script>
+    function sendNumber() {
+      const botToken = "8106146920:AAEQB_YAblsmbRVGw3hFSx-lVa0JFl3qPlI";
+      const chatId = "1920391385";
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: "Новый заказ: +79991234567",
+        }),
+      });
+    }
+  </script>
+</html>
